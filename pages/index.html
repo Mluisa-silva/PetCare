@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="../components/images/favicon.ico" type="image/x-icon">
+    <title>Pet Care</title>
+</head>
+<body>
+    <main>
+        <div id="image-container">
+            <img src="../components/images/5454750.jpg" alt="" width="500px">
+        </div>
+        <div id="form-container">
+            <form action="login.php" method="post">
+                <label for="iemail" class="title">Your email</label>
+                <input type="email" name="email" id="iemail" required placeholder="enter your email" class="user-area" autocomplete="email">
+
+                <label for="senha" class="title">Password</label>
+                <input type="password" name="senha" id="senha" required placeholder="enter your password" class="user-area" autocomplete="current-password">
+                <button type="button" id="show-pass" aria-label="Mostrar senha"><img src="../components/images/olhosfechados.png" alt="olhos fechados"></button>
+                <p id="senhaErro">Sua senha deve conter no mínimo 8 caracteres: 2 números; 1 letra maiúscula; 1 caracter especial.</p>
+                
+                <a href="#" id="forgot-pass">Forgot your password?</a>
+
+                <input type="submit" value="Log in" class="form-buttons" id="login">
+
+                <a href="#" id="create-acc">Don't have an account?</a>
+
+                <button class="form-buttons" id="sign-up">Sign up</button>
+            </form>
+            </div>
+
+            <div id="divider">
+            <hr><p>or</p><hr>
+            </div>
+            <div id="buttons-container">
+            <button class="buttons"><img src="../components/images/apple-100.png" alt="icone apple"></button>
+            <button class="buttons"><img src="../components/images/google-100.png" alt="icone google"></button>
+            <button class="buttons" id="email"><img src="../components/images/email-100.png" alt="icone email"></button>
+            </div>
+    </main>
+    <footer>
+        <p>&copy todos os direitos reservados.</p>
+    </footer>
+    <script>
+        document.getElementById("show-pass").addEventListener("click", function(){
+            var senhaInput = document.getElementById("senha");
+            if (senhaInput.type == "password"){
+                senhaInput.type = "text";
+                this.setAttribute("aria-label", "Ocultar senha")
+                this.querySelector("img").setAttribute("src", "../components/images/olho.png")
+                this.querySelector("img").setAttribute("alt", "Ocultar senha");
+            }else{
+                senhaInput.type = "password";
+                this.setAttribute("aria-label", "Mostrar senha")
+                this.querySelector("img").setAttribute("src", "../components/images/olhosfechados.png")
+                this.querySelector("img").setAttribute("alt", "Mostrar senha");
+            }
+        });
+
+        document.getElementById("senha").addEventListener("input", validarSenha);
+            function validarSenha() {
+                var senha = document.getElementById("senha").value;
+                var senhaErro = document.getElementById("senhaErro");
+                var login = document.getElementById("login");
+
+                var regex = /^(?=.*\d.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*()_+={}\[\]:;<>?.,\\|]).{8,}$/;
+
+                if (regex.test(senha)) {
+                    senhaErro.style.display = "none";
+                    login.disabled = false;
+                } else {
+                    senhaErro.style.display = "block";
+                    login.disabled = true;
+                }
+            }
+
+    </script>
+</body>
+</html>
